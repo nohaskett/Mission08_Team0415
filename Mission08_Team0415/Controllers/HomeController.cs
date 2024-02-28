@@ -14,5 +14,10 @@ namespace Mission08_Team0415.Controllers
         {
             return View();
         }
+
+        public IActionResult TaskEntry()
+        {
+            return View();
+        }
     }
 }
