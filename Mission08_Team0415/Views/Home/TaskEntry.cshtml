@@ -6,6 +6,36 @@
 
 <h1>Please enter your task:</h1>
 
-<form method="post">
+<form method="post" style="max-width: 400px; margin: 0 auto; text-align: left; border: 1px solid #001f3f; padding: 20px; border-radius: 8px;">
 
+    <input type="hidden"/>
+
+    <label style="display: block; margin-bottom: 5px;">Task:</label>
+    <input style="width: 100%; padding: 8px; margin-bottom: 10px; box-sizing: border-box;" required>
+
+    <label style="display: block; margin-bottom: 5px;">Due Date:</label>
+    <input type="date" required>
+
+    <label style="display: block; margin-bottom: 5px;">Quadrant:</label>
+    <input style="width: 100%; padding: 8px; margin-bottom: 10px; box-sizing: border-box;">
+
+    <label style="display: block; margin-bottom: 5px;">Category:</label>
+    <select>
+        <option value="Home">Home</option>
+        <option value="School">School</option>
+        <option value="Work">Work</option>
+        <option value="Church">Church</option>
+    </select>
+
+    <label style="display: block; margin-bottom: 5px;">Completed:</label>
+    <select required>
+        <option value="true">Yes</option>
+        <option value="false">No</option>
+    </select>
+
+    <br /><br />
+
+    <button type="submit" style="background-color: #4CAF50; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer;">Enter Your Movie</button>
+
+    <div asp-validation-summary="All"></div> <!--Display all the error messages-->
 </form>
