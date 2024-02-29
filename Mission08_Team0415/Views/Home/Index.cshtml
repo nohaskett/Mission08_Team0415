@@ -18,14 +18,24 @@
         <div class="col" style="border: 1px solid black; text-align: center;"><h4><b>Quadrant 1</b></h4>
             @foreach (var x in Model.Where(x => x.Quadrant == "1"))
             {
-                <p>@x.TaskName</p>
+                <p>
+                    @x.TaskName &nbsp;&nbsp;
+                    <a class="btn btn-info" asp-controller="Home" asp-action="Edit">Edit</a>&nbsp;&nbsp;
+                    <a class="btn btn-danger" asp-controller="Home" asp-action="Delete">Delete</a>
+
+                </p>
             }
 
         </div>
         <div class="col" style="border: 1px solid black; text-align: center;"><h4><b>Quadrant 2</b></h4>
             @foreach (var x in Model.Where(x => x.Quadrant == "2"))
             {
-                <p>@x.TaskName</p>
+                <p>
+                    @x.TaskName &nbsp;&nbsp;
+                    <a class="btn btn-info" asp-controller="Home" asp-action="Edit">Edit</a>&nbsp;&nbsp;
+                    <a class="btn btn-danger" asp-controller="Home" asp-action="Delete">Delete</a>
+
+                </p>
             }
         </div>
     </div>
@@ -34,13 +44,23 @@
         <div class="col" style="border: 1px solid black; text-align: center;"><h4><b>Quadrant 3</b></h4>
             @foreach (var x in Model.Where(x => x.Quadrant == "3"))
             {
-                <p>@x.TaskName</p>
+                <p>
+                    @x.TaskName &nbsp;&nbsp;
+                    <a class="btn btn-info" asp-controller="Home" asp-action="Edit">Edit</a>&nbsp;&nbsp;
+                    <a class="btn btn-danger" asp-controller="Home" asp-action="Delete">Delete</a>
+                    
+                </p>
             }
         </div>
         <div class="col" style="border: 1px solid black; text-align: center;"><h4><b>Quadrant 4</b></h4>
             @foreach (var x in Model.Where(x => x.Quadrant == "4"))
             {
-                <p>@x.TaskName</p>
+                <p>
+                    @x.TaskName &nbsp;&nbsp;
+                    <a class="btn btn-info" asp-controller="Home" asp-action="Edit">Edit</a>&nbsp;&nbsp;
+                    <a class="btn btn-danger" asp-controller="Home" asp-action="Delete">Delete</a>
+
+                </p>
             }
         </div>
     </div>
