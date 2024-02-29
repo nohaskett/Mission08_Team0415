@@ -4,43 +4,44 @@
 @{
 }
 
+@model Task
 <h1>Please enter your task:</h1>
 
 <form method="post" style="max-width: 400px; margin: 0 auto; text-align: left; border: 1px solid #001f3f; padding: 20px; border-radius: 8px;">
 
-    <input type="hidden"/>
+    <input type="hidden" asp-for="TaskID"/>
 
-    <label style="display: block; margin-bottom: 5px;">Task:</label>
-    <input style="width: 100%; padding: 8px; margin-bottom: 10px; box-sizing: border-box;" required>
+    <label asp-for="TaskName" style="display: block; margin-bottom: 5px;">Task:</label>
+    <input asp-for="TaskName"style="width: 100%; padding: 8px; margin-bottom: 10px; box-sizing: border-box;" required>
 
-    <label style="display: block; margin-bottom: 5px;">Due Date:</label>
-    <input type="date" required>
+    <label asp-for="DueDate" style="display: block; margin-bottom: 5px;">Due Date:</label>
+    <input asp-for="DueDate" type="date" required>
 
-    <label style="display: block; margin-bottom: 5px;">Quadrant:</label>
-    <select>
+    <label asp-for="Quadrant" style="display: block; margin-bottom: 5px;">Quadrant:</label>
+    <select asp-for="Quadrant">
         <option value="1">Important / Urgent</option>
         <option value="2">Important / Not Urgent</option>
         <option value="3">Not Important / Urgent</option>
         <option value="4">Not Important / Not Urgent</option>
     </select>
 
-    <label style="display: block; margin-bottom: 5px;">Category:</label>
-    <select>
+    <label asp-for="Area" style="display: block; margin-bottom: 5px;">Category:</label>
+    <select asp-for="Area">
         <option value="Home">Home</option>
         <option value="School">School</option>
         <option value="Work">Work</option>
         <option value="Church">Church</option>
     </select>
 
-    <label style="display: block; margin-bottom: 5px;">Completed:</label>
-    <select required>
+    <label asp-for="Completed" style="display: block; margin-bottom: 5px;">Completed:</label>
+    <select asp-for="Completed" required>
         <option value="true">Yes</option>
         <option value="false">No</option>
     </select>
 
     <br /><br />
 
-    <button type="submit" style="background-color: #4CAF50; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer;">Enter Your Movie</button>
+    <button type="submit" style="background-color: #4CAF50; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer;">Enter Your Task</button>
 
     <div asp-validation-summary="All"></div> <!--Display all the error messages-->
 </form>
