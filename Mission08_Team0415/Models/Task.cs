@@ -5,6 +5,7 @@ namespace Mission08_Team0415.Models
     public class Task
     {
         [Key]
+        [Required]
         public int TaskID { get; set; }
         [Required]
         public string TaskName { get; set; }

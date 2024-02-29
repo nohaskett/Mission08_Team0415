@@ -3,6 +3,7 @@ using Mission08_Team0415.Models;
 
 //using Mission08_Team0415.Models;
 using System.Diagnostics;
+using Task = Mission08_Team0415.Models.Task;
 
 namespace Mission08_Team0415.Controllers
 {
@@ -23,6 +24,18 @@ namespace Mission08_Team0415.Controllers
         public IActionResult TaskEntry()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddTask(Task task)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(task);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View("TaskEntry");
         }
     }
 }
