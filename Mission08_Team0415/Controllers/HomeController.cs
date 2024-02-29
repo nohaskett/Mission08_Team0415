@@ -18,7 +18,9 @@ namespace Mission08_Team0415.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            var task = _context.Tasks.ToList();
+
+            return View(task);
         }
 
         public IActionResult TaskEntry()
