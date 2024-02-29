@@ -16,17 +16,32 @@
     <div class="row" style="border: 1px solid black;">
         <div class="col-1" style="border: 1px solid black; writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); text-align: center;"><h4><b>Important</b></h4></div>
         <div class="col" style="border: 1px solid black; text-align: center;"><h4><b>Quadrant 1</b></h4>
-            @foreach (var x in Model)
+            @foreach (var x in Model.Where(x => x.Quadrant == "1"))
             {
                 <p>@x.TaskName</p>
             }
 
         </div>
-        <div class="col" style="border: 1px solid black; text-align: center;"><h4><b>Quadrant 2</b></h4></div>
+        <div class="col" style="border: 1px solid black; text-align: center;"><h4><b>Quadrant 2</b></h4>
+            @foreach (var x in Model.Where(x => x.Quadrant == "2"))
+            {
+                <p>@x.TaskName</p>
+            }
+        </div>
     </div>
     <div class="row" style="border: 1px solid black;">
         <div class="col-1" style="border: 1px solid black; writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); text-align: center;"><h4><b>Not Important</b></h4></div>
-        <div class="col" style="border: 1px solid black; text-align: center;"><h4><b>Quadrant 3</b></h4></div>
-        <div class="col" style="border: 1px solid black; text-align: center;"><h4><b>Quadrant 4</b></h4></div>
+        <div class="col" style="border: 1px solid black; text-align: center;"><h4><b>Quadrant 3</b></h4>
+            @foreach (var x in Model.Where(x => x.Quadrant == "3"))
+            {
+                <p>@x.TaskName</p>
+            }
+        </div>
+        <div class="col" style="border: 1px solid black; text-align: center;"><h4><b>Quadrant 4</b></h4>
+            @foreach (var x in Model.Where(x => x.Quadrant == "4"))
+            {
+                <p>@x.TaskName</p>
+            }
+        </div>
     </div>
 </div>
