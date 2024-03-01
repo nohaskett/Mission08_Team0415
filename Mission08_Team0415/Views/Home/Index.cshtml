@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@model List<Mission08_Team0415.Models.Task>
 
 <div class="text-center">
     <h1>Welcome to our To-Do List</h1>
@@ -8,18 +9,80 @@
 
 <div class="container">
     <div class="row" style="border: 1px solid black; ">
-        <div class="col-1" style="border: 1px solid black;"></div>
+        <div class="col-auto" style="border: 1px solid black; min-width: 100px;"></div>
         <div class="col" style="border: 1px solid black; text-align: center;"><h4><b>Urgent</b></h4></div>
         <div class="col" style="border: 1px solid black; text-align: center;"><h4><b>Not Urgent</b></h4></div>
     </div>
     <div class="row" style="border: 1px solid black;">
-        <div class="col-1" style="border: 1px solid black; writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); text-align: center;"><h4><b>Important</b></h4></div>
-        <div class="col" style="border: 1px solid black; text-align: center;"><h4><b>Quadrant 10</b></h4></div>
-        <div class="col" style="border: 1px solid black; text-align: center;"><h4><b>Quadrant 2</b></h4></div>
+        <div class="col-auto" style="border: 1px solid black; writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); text-align: center; padding: 0; margin: 0; min-width: 100px;"><h4><b>Important</b></h4></div>
+        <div class="col" style="border: 1px solid black; text-align: center;"><h4><b>Quadrant 1</b></h4>
+            @foreach (var x in Model.Where(x => x.Quadrant == "1"))
+            {
+                <p>
+                    <div class="d-inline">
+                        @x.TaskName &nbsp;&nbsp;
+                        <a href="@Url.Action("Edit", new { id = @x.TaskID })" class="btn btn-primary btn-sm">Edit</a>
+                        <form asp-action="DeleteTask" method="post" class="d-inline">
+                            <input type="hidden" name="id" value="@x.TaskID" />
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this?');">Delete</button>
+                        </form>
+                    </div>
+
+                </p>
+            }
+
+        </div>
+        <div class="col" style="border: 1px solid black; text-align: center;"><h4><b>Quadrant 2</b></h4>
+            @foreach (var x in Model.Where(x => x.Quadrant == "2"))
+            {
+                <p>
+                    <div class="d-inline">
+                        @x.TaskName &nbsp;&nbsp;
+                        <a href="@Url.Action("Edit", new { id = @x.TaskID })" class="btn btn-primary btn-sm">Edit</a>
+                        <form asp-action="DeleteTask" method="post" class="d-inline">
+                            <input type="hidden" name="id" value="@x.TaskID" />
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this?');">Delete</button>
+                        </form>
+                    </div>
+
+                </p>
+            }
+        </div>
     </div>
     <div class="row" style="border: 1px solid black;">
-        <div class="col-1" style="border: 1px solid black; writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); text-align: center;"><h4><b>Not Important</b></h4></div>
-        <div class="col" style="border: 1px solid black; text-align: center;"><h4><b>Quadrant 3</b></h4></div>
-        <div class="col" style="border: 1px solid black; text-align: center;"><h4><b>Quadrant 4</b></h4></div>
+        <div class="col-auto" style="border: 1px solid black; writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); text-align: center; padding: 0; margin: 0; min-width: 100px;"><h4><b>Not Important</b></h4></div>
+        <div class="col" style="border: 1px solid black; text-align: center;"><h4><b>Quadrant 3</b></h4>
+            @foreach (var x in Model.Where(x => x.Quadrant == "3"))
+            {
+                <p>
+                    <div class="d-inline">
+                        @x.TaskName &nbsp;&nbsp;
+                        <a href="@Url.Action("Edit", new { id = @x.TaskID })" class="btn btn-primary btn-sm">Edit</a>
+                        <form asp-action="DeleteTask" method="post" class="d-inline">
+                            <input type="hidden" name="id" value="@x.TaskID" />
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this?');">Delete</button>
+                        </form>
+                    </div>
+
+                </p>
+            }
+        </div>
+        <div class="col" style="border: 1px solid black; text-align: center;"><h4><b>Quadrant 4</b></h4>
+            @foreach (var x in Model.Where(x => x.Quadrant == "4"))
+            {
+                <p>
+                    
+                    <div class="d-inline">
+                        @x.TaskName &nbsp;&nbsp;
+                        <a href="@Url.Action("Edit", new { id = @x.TaskID })" class="btn btn-primary btn-sm">Edit</a>
+                        <form asp-action="DeleteTask" method="post" class="d-inline">
+                            <input type="hidden" name="id" value="@x.TaskID" />
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this?');">Delete</button>
+                        </form>
+                    </div>
+
+                </p>
+            }
+        </div>
     </div>
 </div>

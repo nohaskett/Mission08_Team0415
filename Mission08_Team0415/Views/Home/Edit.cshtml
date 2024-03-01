@@ -1,15 +1,14 @@
 ﻿@using Mission08_Team0415.Models
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+
 @{
-    ViewData["Title"] = "Add New Task";
+    ViewData["Title"] = "Edit Task";
 }
-
 @model Mission08_Team0415.Models.Task
-<h1>Please enter your task:</h1>
 
-<form asp-action="AddTask" method="post" style="max-width: 400px; margin: 0 auto; text-align: left; border: 1px solid #001f3f; padding: 20px; border-radius: 8px;">
+<h1>Edit Task - @Model.TaskName</h1>
+
+<form asp-action="Edit" method="post" style="max-width: 400px; margin: 0 auto; text-align: left; border: 1px solid #001f3f; padding: 20px; border-radius: 8px;">
+    <input type="hidden" asp-for="TaskID" />
 
     <label asp-for="TaskName" style="display: block; margin-bottom: 5px;">Task:</label>
     <input asp-for="TaskName" style="width: 100%; padding: 8px; margin-bottom: 10px; box-sizing: border-box;" required>
@@ -35,6 +34,7 @@
         }
     </select>
     <br /><br />
+
     <label asp-for="Completed" style="display: block; margin-bottom: 5px;">Completed:</label>
     <select asp-for="Completed" required>
         <option value="true">Yes</option>
@@ -43,7 +43,7 @@
 
     <br /><br />
 
-    <button type="submit" style="background-color: #4CAF50; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer;">Enter Your Task</button>
+    <button type="submit" style="background-color: #4CAF50; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer;">Update Task</button>
 
     <div asp-validation-summary="All"></div> <!--Display all the error messages-->
 </form>
