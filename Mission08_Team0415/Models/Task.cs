@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Mission08_Team0415.Models
 {
@@ -12,8 +13,10 @@ namespace Mission08_Team0415.Models
         public DateOnly? TaskDate { get; set; }
         [Required]
         public string Quadrant { get; set; }
-        [Required]
-        public string Category { get; set; }
+
+        [ForeignKey("CategoryId")]
+        public int ? CategoryId { get; set; }
+        public Category ? Category { get; set; }
         [Required]
         public bool Completed { get; set; }
     }

@@ -39,5 +39,23 @@ namespace Mission08_Team0415.Controllers
             }
             return View("TaskEntry");
         }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var recordToDelete = _context.Tasks
+                .Single(x => x.TaskID == id);
+
+            return View(recordToDelete);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Task task)
+        {
+            _context.Tasks.Remove(task);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
     }
 }
