@@ -9,12 +9,12 @@
 
 <div class="container">
     <div class="row" style="border: 1px solid black; ">
-        <div class="col-1" style="border: 1px solid black;"></div>
+        <div class="col-auto" style="border: 1px solid black; min-width: 100px;"></div>
         <div class="col" style="border: 1px solid black; text-align: center;"><h4><b>Urgent</b></h4></div>
         <div class="col" style="border: 1px solid black; text-align: center;"><h4><b>Not Urgent</b></h4></div>
     </div>
     <div class="row" style="border: 1px solid black;">
-        <div class="col-1" style="border: 1px solid black; writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); text-align: center;"><h4><b>Important</b></h4></div>
+        <div class="col-auto" style="border: 1px solid black; writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); text-align: center; padding: 0; margin: 0; min-width: 100px;"><h4><b>Important</b></h4></div>
         <div class="col" style="border: 1px solid black; text-align: center;"><h4><b>Quadrant 1</b></h4>
             @foreach (var x in Model.Where(x => x.Quadrant == "1"))
             {
@@ -50,7 +50,7 @@
         </div>
     </div>
     <div class="row" style="border: 1px solid black;">
-        <div class="col-1" style="border: 1px solid black; writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); text-align: center;"><h4><b>Not Important</b></h4></div>
+        <div class="col-auto" style="border: 1px solid black; writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); text-align: center; padding: 0; margin: 0; min-width: 100px;"><h4><b>Not Important</b></h4></div>
         <div class="col" style="border: 1px solid black; text-align: center;"><h4><b>Quadrant 3</b></h4>
             @foreach (var x in Model.Where(x => x.Quadrant == "3"))
             {
