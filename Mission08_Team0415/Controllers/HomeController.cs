@@ -25,6 +25,8 @@ namespace Mission08_Team0415.Controllers
 
         public IActionResult TaskEntry()
         {
+            // Send it the viewbag list of categories to use in the dropdown
+            ViewBag.Categories = _context.Categories.ToList();
             return View();
         }
 
@@ -40,20 +42,15 @@ namespace Mission08_Team0415.Controllers
             return View("TaskEntry");
         }
 
-        [HttpGet]
-        public IActionResult Delete(int id)
-        {
-            var recordToDelete = _context.Tasks
-                .Single(x => x.TaskID == id);
-
-            return View(recordToDelete);
-        }
-
         [HttpPost]
-        public IActionResult Delete(Task task)
+        public IActionResult DeleteTask(int id)
         {
-            _context.Tasks.Remove(task);
-            _context.SaveChanges();
+            var movie = _context.Tasks.Find(id);
+            if (movie != null)
+            {
+                _context.Tasks.Remove(movie);
+                _context.SaveChanges();
+            }
 
             return RedirectToAction("Index");
         }
