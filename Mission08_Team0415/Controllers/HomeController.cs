@@ -19,7 +19,9 @@ namespace Mission08_Team0415.Controllers
         }
         public IActionResult Index()
         {
-            var task = _context.Tasks.ToList();
+            var task = _context.Tasks
+                .Where(t => !t.Completed)
+                .ToList();
 
             return View(task);
         }
