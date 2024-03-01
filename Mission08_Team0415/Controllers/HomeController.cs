@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Mission08_Team0415.Models;
 
 //using Mission08_Team0415.Models;
@@ -53,6 +54,24 @@ namespace Mission08_Team0415.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var task = await _context.Tasks.FindAsync(id);
+            if (task == null)
+            {
+                return NotFound();
+            }
+
+            // Fetch categories and assign to ViewBag
+            ViewBag.Categories = new SelectList(_context.Categories, "CategoryId", "CategoryName", task.CategoryId);
+
+            return View(task);
         }
     }
 }
