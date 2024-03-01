@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Mission08_Team0415.Models;
 
 //using Mission08_Team0415.Models;
@@ -68,6 +69,34 @@ namespace Mission08_Team0415.Controllers
             if (task == null)
             {
                 return NotFound();
+            }
+
+            // Fetch categories and assign to ViewBag
+            ViewBag.Categories = _context.Categories.ToList();
+
+            return View(task);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("TaskID,TaskName,TaskDate,Quadrant,CategoryId,Completed")] Task task)
+        {
+            if (id != task.TaskID)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(task);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    throw;
+                }
+                return RedirectToAction(nameof(Index));
             }
 
             // Fetch categories and assign to ViewBag

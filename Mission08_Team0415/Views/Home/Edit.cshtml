@@ -1,13 +1,49 @@
-﻿@{
+﻿@using Mission08_Team0415.Models
+
+@{
     ViewData["Title"] = "Edit Task";
 }
 @model Mission08_Team0415.Models.Task
 
 <h1>Edit Task - @Model.TaskName</h1>
 
-Placeholder for the form to edit a task.
+<form asp-action="Edit" method="post" style="max-width: 400px; margin: 0 auto; text-align: left; border: 1px solid #001f3f; padding: 20px; border-radius: 8px;">
+    <input type="hidden" asp-for="TaskID" />
 
-<br />
-|-------------|<br />
-|Submit Button|<br />
-|-------------|
+    <label asp-for="TaskName" style="display: block; margin-bottom: 5px;">Task:</label>
+    <input asp-for="TaskName" style="width: 100%; padding: 8px; margin-bottom: 10px; box-sizing: border-box;" required>
+
+    <label asp-for="TaskDate" style="display: block; margin-bottom: 5px;">Task Date:</label>
+    <input asp-for="TaskDate" type="date">
+
+    <label asp-for="Quadrant" style="display: block; margin-bottom: 5px;">Quadrant:</label>
+    <select asp-for="Quadrant" required>
+        <option value="1">Important / Urgent</option>
+        <option value="2">Important / Not Urgent</option>
+        <option value="3">Not Important / Urgent</option>
+        <option value="4">Not Important / Not Urgent</option>
+    </select>
+    <br /><br />
+
+    <label asp-for="CategoryId">Category: </label>
+    <select asp-for="CategoryId">
+        <option value="">Select a Category</option>
+        @foreach (Category c in ViewBag.Categories)
+        {
+            <option value="@c.CategoryId">@c.CategoryName</option>
+        }
+    </select>
+    <br /><br />
+
+    <label asp-for="Completed" style="display: block; margin-bottom: 5px;">Completed:</label>
+    <select asp-for="Completed" required>
+        <option value="true">Yes</option>
+        <option value="false">No</option>
+    </select>
+
+    <br /><br />
+
+    <button type="submit" style="background-color: #4CAF50; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer;">Update Task</button>
+
+    <div asp-validation-summary="All"></div> <!--Display all the error messages-->
+</form>
