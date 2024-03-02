@@ -1,9 +1,9 @@
+// Authors: Nya Croft, Noah Hicks, Noah Hasket, Jensen Hermansen
+// Section 004
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using Mission08_Team0415.Models;
-
-//using Mission08_Team0415.Models;
 using System.Diagnostics;
 using Task = Mission08_Team0415.Models.Task;
 
@@ -11,74 +11,71 @@ namespace Mission08_Team0415.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private ITaskRepository _repo;
 
-        // Consolidated constructor
-        public HomeController(ApplicationDbContext context, ILogger<HomeController> logger)
+        public HomeController(ITaskRepository temp)
         {
-            _context = context;
+            _repo = temp;
         }
+
+        // Display matrix with tasks
         public IActionResult Index()
         {
-            var task = _context.Tasks
-                .Where(t => !t.Completed)
-                .ToList();
-
-            return View(task);
+            var tasks = _repo.Tasks.Where(t => !t.Completed).ToList();
+            return View(tasks);
         }
 
+        // Display form
         public IActionResult TaskEntry()
         {
             // Send it the viewbag list of categories to use in the dropdown
-            ViewBag.Categories = _context.Categories.ToList();
+            ViewBag.Categories = _repo.Categories.ToList();
             return View();
         }
 
+
+        // Add Task
         [HttpPost]
         public IActionResult AddTask(Task task)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(task);
-                _context.SaveChanges();
+                _repo.AddTask(task);
                 return RedirectToAction("Index");
             }
-            return View("TaskEntry");
+            ViewBag.Categories = _repo.Categories.ToList();
+            return View("TaskEntry", task);
         }
 
-        [HttpPost]
+        // Delete Task
         public IActionResult DeleteTask(int id)
         {
-            var movie = _context.Tasks.Find(id);
-            if (movie != null)
-            {
-                _context.Tasks.Remove(movie);
-                _context.SaveChanges();
-            }
-
+            _repo.DeleteTask(id);
             return RedirectToAction("Index");
         }
-        public async Task<IActionResult> Edit(int? id)
+
+        // Edit Task
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var task = await _context.Tasks.FindAsync(id);
+            var task = _repo.GetTask(id.Value);
             if (task == null)
             {
                 return NotFound();
             }
 
             // Fetch categories and assign to ViewBag
-            ViewBag.Categories = _context.Categories.ToList();
-
+            ViewBag.Categories = _repo.Categories.ToList();
             return View(task);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("TaskID,TaskName,TaskDate,Quadrant,CategoryId,Completed")] Task task)
+        public IActionResult Edit(int id, [Bind("TaskID,TaskName,TaskDate,Quadrant,CategoryId,Completed")] Task task)
         {
             if (id != task.TaskID)
             {
@@ -87,21 +84,12 @@ namespace Mission08_Team0415.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(task);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    throw;
-                }
+                _repo.UpdateTask(task);
                 return RedirectToAction(nameof(Index));
             }
 
             // Fetch categories and assign to ViewBag
-            ViewBag.Categories = new SelectList(_context.Categories, "CategoryId", "CategoryName", task.CategoryId);
-
+            ViewBag.Categories = new SelectList(_repo.Categories, "CategoryId", "CategoryName", task.CategoryId);
             return View(task);
         }
     }

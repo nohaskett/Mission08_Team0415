@@ -11,8 +11,8 @@ using Mission08_Team0415.Models;
 namespace Mission08_Team0415.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240301025824_Version2")]
-    partial class Version2
+    [Migration("20240302043308_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -7,21 +8,11 @@
 namespace Mission08_Team0415.Migrations
 {
     /// <inheritdoc />
-    public partial class Version2 : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "Category",
-                table: "Tasks");
-
-            migrationBuilder.AddColumn<int>(
-                name: "CategoryId",
-                table: "Tasks",
-                type: "INTEGER",
-                nullable: true);
-
             migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
@@ -33,6 +24,28 @@ namespace Mission08_Team0415.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.CategoryId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Tasks",
+                columns: table => new
+                {
+                    TaskID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    TaskName = table.Column<string>(type: "TEXT", nullable: false),
+                    TaskDate = table.Column<DateOnly>(type: "TEXT", nullable: true),
+                    Quadrant = table.Column<string>(type: "TEXT", nullable: false),
+                    CategoryId = table.Column<int>(type: "INTEGER", nullable: true),
+                    Completed = table.Column<bool>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tasks", x => x.TaskID);
+                    table.ForeignKey(
+                        name: "FK_Tasks_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "CategoryId");
                 });
 
             migrationBuilder.InsertData(
@@ -50,39 +63,16 @@ namespace Mission08_Team0415.Migrations
                 name: "IX_Tasks_CategoryId",
                 table: "Tasks",
                 column: "CategoryId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Tasks_Categories_CategoryId",
-                table: "Tasks",
-                column: "CategoryId",
-                principalTable: "Categories",
-                principalColumn: "CategoryId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Tasks_Categories_CategoryId",
-                table: "Tasks");
+            migrationBuilder.DropTable(
+                name: "Tasks");
 
             migrationBuilder.DropTable(
                 name: "Categories");
-
-            migrationBuilder.DropIndex(
-                name: "IX_Tasks_CategoryId",
-                table: "Tasks");
-
-            migrationBuilder.DropColumn(
-                name: "CategoryId",
-                table: "Tasks");
-
-            migrationBuilder.AddColumn<string>(
-                name: "Category",
-                table: "Tasks",
-                type: "TEXT",
-                nullable: false,
-                defaultValue: "");
         }
     }
 }
